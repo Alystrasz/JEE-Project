@@ -44,7 +44,7 @@ public class Pokemon {
         this.hp = hp;
     }
 
-    public int getHpPercent(){
+    public int getHpPercent() {
         return 100 * this.hp / this.type.getStats().getHp();
     }
 }

@@ -1,0 +1,19 @@
+{
+  "base_experience": 306,
+  "height": 20,
+  "id": 150,
+  "name": "mewtwo",
+  "sprites": {
+    "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/150.png",
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+  },
+  "stats": {
+    "speed": 130,
+    "special-defense": 90,
+    "special-attack": 154,
+    "defense": 90,
+    "attack": 110,
+    "hp": 106
+  },
+  "weight": 1220
+}

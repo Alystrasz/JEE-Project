@@ -1,0 +1,14 @@
+{
+  "base_experience": 182,
+  "height": 11,
+  "id": 121,
+  "is_default": true,
+  "location_area_encounters": "https://pokeapi.co/api/v2/pokemon/121/encounters",
+  "name": "starmie",
+  "order": 174,
+  "sprites": {
+    "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/121.png",
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png"
+  },
+  "weight": 800
+}

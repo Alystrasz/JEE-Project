@@ -1,0 +1,19 @@
+{
+  "base_experience": 112,
+  "height": 4,
+  "id": 25,
+  "name": "pikachu",
+  "sprites": {
+    "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+  },
+  "stats": {
+    "speed": 90,
+    "special-defence": 50,
+    "special-attack": 50,
+    "defense": 40,
+    "attack": 55,
+    "hp": 35
+  },
+  "weight": 60
+}

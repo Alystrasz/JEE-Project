@@ -1,18 +1,17 @@
 package com.ifi.tp.trainers.service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.ifi.tp.bo.HPNotification;
-import com.ifi.tp.trainers.bo.Trainer;
-
 import com.ifi.tp.pokemonTypes.service.PokemonService;
+import com.ifi.tp.trainers.bo.Trainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class TrainerServiceImpl implements TrainerService {
@@ -40,7 +39,7 @@ public class TrainerServiceImpl implements TrainerService {
         return this.enrich(trainer);
     }
 
-    private Trainer enrich(Trainer trainer){
+    private Trainer enrich(Trainer trainer) {
         trainer.getTeam()
                 .stream()
                 .forEach(pokemon -> pokemon.setType(pokemonService.getPokemonType(pokemon.getPokemonNumber())));
@@ -67,16 +66,15 @@ public class TrainerServiceImpl implements TrainerService {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    @JmsListener(destination="notification")
-    public void receiveNotification(HPNotification notification){
+    @JmsListener(destination = "notification")
+    public void receiveNotification(HPNotification notification) {
         var pokemonType = pokemonService.getPokemonType(notification.getPokemon().getPokemonNumber());
 
         String message;
-        if(notification.isFullHP()){
+        if (notification.isFullHP()) {
             message = String.format("Your %s has recovered all of its HP !", pokemonType.getName());
-        }
-        else{
-            message = String.format("Your %s has recovered one HP !", pokemonType.getName() );
+        } else {
+            message = String.format("Your %s has recovered one HP !", pokemonType.getName());
         }
 
         simpMessagingTemplate.convertAndSendToUser(notification.getTrainer().getName(), "/topic/notification", message);

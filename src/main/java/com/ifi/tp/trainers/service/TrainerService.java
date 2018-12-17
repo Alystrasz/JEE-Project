@@ -1,8 +1,8 @@
 package com.ifi.tp.trainers.service;
 
-import java.util.List;
-
 import com.ifi.tp.trainers.bo.Trainer;
+
+import java.util.List;
 
 public interface TrainerService {
 

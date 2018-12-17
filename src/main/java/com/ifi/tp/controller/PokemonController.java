@@ -1,7 +1,6 @@
 package com.ifi.tp.controller;
 
 import com.ifi.tp.pokemonTypes.service.PokemonService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,15 +18,14 @@ public class PokemonController {
     }
 
     @GetMapping("/pokemons")
-    public ModelAndView pokemons(@RequestParam(defaultValue = "front") String view){
+    public ModelAndView pokemons(@RequestParam(defaultValue = "front") String view) {
         var modelAndView = new ModelAndView("pokemons");
 
         modelAndView.addObject("pokemons", pokemonService.listPokemonsTypes());
 
-        if("front".equals(view)){
+        if ("front".equals(view)) {
             modelAndView.addObject("view_front", true);
-        }
-        else{
+        } else {
             modelAndView.addObject("view_back", true);
         }
 
