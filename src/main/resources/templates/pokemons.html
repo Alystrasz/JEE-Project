@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+{{> layout/header}}
+<body>
+
+    <nav class="site-header sticky-top py-1">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2" href="/">
+                <img src="/icons/pokeball.png" style="width: 50px;"/>
+            </a>
+            <a class="py-2 d-none d-md-inline-block" href="/trainers">
+                <img src="/icons/player.png" style="width: 50px;"/>
+                Trainers
+            </a>
+            <a class="py-2 d-none d-md-inline-block" href="/pokemons">
+                <img src="/icons/pikachu.png" style="width: 50px;"/>
+                Pokedex
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="pt-md-5">Pokemons</h1>
+
+        <div class="btn-group pb-md-5" role="group">
+            <a href="/pokemons?view=front" type="button" class="btn {{#view_front}}btn-primary{{/view_front}} {{#view_back}}btn-secondary{{/view_back}}">Front</a>
+            <a href="/pokemons?view=back" type="button" class="btn {{#view_back}}btn-primary{{/view_back}} {{#view_front}}btn-secondary{{/view_front}}">Back</a>
+        </div>
+
+        <div class="card-deck">
+            {{#pokemons}}
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{name}} <span class="badge badge-secondary">Id {{id}}</span></h4>
+                    </div>
+                    {{#view_front}}
+                    <img class="card-img-top" src="{{sprites.front_default}}" alt="Pokemon">
+                    {{/view_front}}
+                    {{#view_back}}
+                    <img class="card-img-top" src="{{sprites.back_default}}" alt="Pokemon">
+                    {{/view_back}}
+
+                    <div class="card-body">
+                        <span class="badge badge-primary">Speed : {{stats.speed}}</span>
+                        <span class="badge badge-primary">Attack : {{stats.attack}}</span>
+                        <span class="badge badge-primary">Defense : {{stats.defense}}</span>
+                        <span class="badge badge-primary">HP : {{stats.hp}}</span>
+                    </div>
+                </div>
+            </div>
+            {{/pokemons}}
+        </div>
+
+
+    </div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

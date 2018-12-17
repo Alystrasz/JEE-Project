@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+{{> layout/header}}
+<body>
+
+    <nav class="site-header sticky-top py-1">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2" href="/">
+                <img src="/icons/pokeball.png" style="width: 50px;"/>
+            </a>
+            <a class="py-2 d-none d-md-inline-block" href="/trainers">
+                <img src="/icons/player.png" style="width: 50px;"/>
+                Trainers
+            </a>
+            <a class="py-2 d-none d-md-inline-block" href="/pokemons">
+                <img src="/icons/pikachu.png" style="width: 50px;"/>
+                Pokedex
+            </a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="pt-md-5 pb-md-5">Trainer : {{trainer.name}} <img src="{{trainer.picture}}" style="height: 100px;"/></h1>
+
+        <div class="card-deck">
+            {{#trainer.team}}
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{type.name}} <span class="badge badge-secondary">Level {{level}}</span></h4>
+                    </div>
+                    <img class="card-img-top" src="{{type.sprites.front_default}}" alt="Card image cap">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            HP :
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{hpPercent}}%" aria-valuenow="{{hp}}" aria-valuemin="0" aria-valuemax="{{type.stats.hp}}"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">Base stats : <span class="badge badge-primary">Speed : {{type.stats.speed}}</span>
+                            <span class="badge badge-primary">Attack : {{type.stats.attack}}</span>
+                            <span class="badge badge-primary">Defense : {{type.stats.defense}}</span>
+                            <span class="badge badge-primary">HP : {{type.stats.hp}}</span></li>
+                    </ul>
+
+                </div>
+            </div>
+            {{/trainer.team}}
+        </div>
+
+
+    </div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <script>
+        var stompClient = null;
+
+        function connect(user) {
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe(`/user/${user}/topic/notification`, function (message) {
+                    showNotification(message);
+                });
+            });
+        }
+
+        function showNotification(message) {
+            console.log(message);
+            toastr.info(message.body);
+        }
+
+        connect("{{trainer.name}}");
+
+    </script>
+</body>
+</html>

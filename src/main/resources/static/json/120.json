@@ -1,0 +1,14 @@
+{
+  "base_experience": 68,
+  "height": 8,
+  "id": 120,
+  "is_default": true,
+  "location_area_encounters": "https://pokeapi.co/api/v2/pokemon/120/encounters",
+  "name": "staryu",
+  "order": 173,
+  "sprites": {
+    "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/120.png",
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/120.png"
+  },
+  "weight": 345
+}
