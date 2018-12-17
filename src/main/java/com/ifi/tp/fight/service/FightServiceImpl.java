@@ -29,7 +29,6 @@ public class FightServiceImpl implements FightService {
         // tant que les 2 équipes contiennent au moins un pokémon
         while (!team1.isEmpty() && !team2.isEmpty()) {
 
-
             Pokemon p1 = team1.get(0);
             Pokemon p2 = team2.get(0);
 
@@ -66,21 +65,33 @@ public class FightServiceImpl implements FightService {
 
                     p1.setHp(p1.getHp() - damage);
                     logs.add(p2name + " attacks! " + p1name + " looses " + damage + " HP.");
+
+                    damage = p1attack - p2defence;
+                    if (damage <= 0) damage = 1;
+
+                    p2.setHp(p2.getHp() - damage);
+                    logs.add(p1name + " attacks! " + p2name + " looses " + damage + " HP.");
                 } else {
                     int damage = p1attack - p2defence;
                     if (damage <= 0) damage = 1;
 
                     p2.setHp(p2.getHp() - damage);
                     logs.add(p1name + " attacks! " + p2name + " looses " + damage + " HP.");
+
+                    damage = p2attack - p1defence;
+                    if (damage <= 0) damage = 1;
+
+                    p1.setHp(p1.getHp() - damage);
+                    logs.add(p2name + " attacks! " + p1name + " looses " + damage + " HP.");
                 }
 
             }
 
             if (p1.getHp() <= 0) {
-                logs.add(p1name + "is KO!");
+                logs.add(p1name + " is KO!");
                 team1.remove(p1);
             } else if (p2.getHp() <= 0) {
-                logs.add(p2name + "is KO!");
+                logs.add(p2name + " is KO!");
                 team2.remove(p2);
             } else {
                 logs.add("bug");
